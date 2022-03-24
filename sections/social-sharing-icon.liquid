@@ -1,0 +1,41 @@
+<section class="section">
+  <div class="container">
+    <div class="one-whole column text-center">
+      	{% if section.settings.title != blank %}
+          <h2 class="social-sharing__heading title">
+            {{ section.settings.title | escape }}
+          </h2>
+      {% endif %}
+      	<div class="social-sharing-flex">
+			{% render 'social-sharing-icon' %}
+      	</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Social Sharing",
+	"class": "shopify-section--social-sharing-icon",
+    "settings": [
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Share this far and wide..."
+    }
+	],
+	"presets": [
+      {
+      "name": "social_media",
+      "category": "Social Media"
+      }
+      ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

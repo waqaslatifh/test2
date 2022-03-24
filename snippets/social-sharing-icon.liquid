@@ -1,0 +1,72 @@
+{% comment %}
+  This snippet provides a method of creating social share links with decent functionality without having to load the
+  third party Javascript libraries. This drastically improves page load times.
+  This snippet handles both product and article pages, and sets up an appropriate title, description and image for the
+  various social networks. The Javascript snippet at the bottom of the page enabled the opening of these share widgets
+  in a popup windows, appropriately sized for the network. You can remove the Javascript and the links will still
+  function as intended.
+  It is made available as part of the "Mastering Shopify Themes" course by Gavin Ballard (gavin@gavinballard.com) and
+  can be used freely by anyone in their themes. Learn more at http://gavinballard.com/mastering-shopify-themes/.
+{% endcomment %}
+
+{% assign image_url = '' %}
+{% assign title_text = '' %}
+{% assign summary_text = '' %}
+{% if product %}
+  {% assign image_url = product.featured_image | product_img_url: 'large' %}
+  {% capture title_text %}Check out {{ product.title | escape }}, only {{ product.price | money | remove: '.00' }}!{% endcapture %}
+  {% assign summary_text = product.description | strip_html | truncatewords: 100, '' %}
+{% elsif template contains 'article' %}
+  {% capture title_text %}{{ article.title }} on {{ shop.name }}{% endcapture %}
+  {% capture summary_text %}{{ article.excerpt | strip_html | truncatewords: 100, '' | escape }}{% endcapture %}
+  {% if article.content contains '<img' %}
+    {% assign src = article.content | split: 'src="' %}
+    {% assign src = src[1] | split: '"' | first | replace: '//cdn', 'http://cdn' | replace: 'http:http://', 'http://' | remove: 'https:'  %}
+    {% if src %}
+      {% assign image_url = src %}
+    {% endif %}
+  {% endif %}
+{% else %}
+  {% capture title_text %}{{ page.title }} on {{ shop.name }}{% endcapture %}
+  {% capture summary_text %}{{ page.content | strip_html | truncatewords: 100, '' | escape }}{% endcapture %}
+{% endif %}
+
+{% assign title_text = title_text | url_escape %}
+<a href="http://twitter.com/share?text={{ title_text }}{{ ':' | url_escape }}&url={{ canonical_url | url_param_escape }}" target="_blank" class="icon-twitter" data-social-width="600" data-social-height="258">
+  {% render 'icon-twitter' %}
+</a>
+<a href="http://www.facebook.com/sharer/sharer.php?u={{ canonical_url | url_param_escape }}&t={{ title_text }}" target="_blank" class="icon-facebook" data-social-width="600" data-social-height="368">
+  {% render 'icon-facebook' %}
+</a>
+<a href="https://www.linkedin.com/shareArticle?mini=true&url={{ canonical_url | url_param_escape }}&title={{ title_text }}&summary={{ summary_text | url_escape }}&source=" target="_blank" class="icon-linkedin" data-social-width="585" data-social-height="471">
+  {% render 'icon-linkedin' %}
+</a>
+<a href="https://plus.google.com/share?url={{ canonical_url | url_param_escape }}" target="_blank" class="icon-email" data-social-width="500" data-social-height="505">
+ {% render 'icon-email' %}
+</a>
+
+{% comment %}
+<a href="http://www.stumbleupon.com/submit?url={{ canonical_url | url_param_escape }}&title={{ title_text }}" target="_blank" class="fa-stack" data-social-width="500" data-social-height="350">
+  StumbleUpon
+</a>
+
+<a href="https://pinterest.com/pin/create/button/?url={{ canonical_url | url_param_escape }}{% unless image_url == blank %}&media={{ image_url | url_param_escape }}{% endunless %}&description={{ title_text }}" target="_blank" class="icon-pinterest" data-social-width="750" data-social-height="322">
+ {% render 'social-sharing-icon' %}
+</a>
+{% endcomment %}
+
+<script type="text/javascript">
+(function($) {
+  // Requires jQuery.
+  $('[data-social-width]').click(function(e) {
+    e.stopPropagation();
+    var $a = $(this),
+        height = $a.data('socialHeight'),
+        width = $a.data('socialWidth'),
+        top =  Math.max(0,(screen.height - height) / 2),
+        left =  Math.max(0,(screen.width - width) / 2),
+        specs = 'height='+height+',width='+width+',top='+top+',left='+left+',status=0,toolbar=0,directories=0,location=0'+',menubar=0,resizable=1,scrollbars=1';
+    window.open($a.attr('href'), 'social-window-' + Math.random(), specs);
+  });
+})(jQuery);
+</script>

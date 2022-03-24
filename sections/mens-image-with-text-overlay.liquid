@@ -1,0 +1,308 @@
+{% comment %}
+** Image with text overlay - homepage partial **
+- Draggable section
+{% endcomment %}
+
+{% if type == 'block' %}
+  {% assign id = block.id %}
+  {% assign wide_display = block.settings.wide_display %}
+  {% assign image = block.settings.image %}
+{% assign colour = block.settings.colour %}
+  {% assign pretext = block.settings.pretext %}
+  {% assign title = block.settings.title %}
+  {% assign subtitle = block.settings.subtitle %}
+  {% assign caption_background = block.settings.caption_background %}
+  {% assign caption_background_transparency = block.settings.caption_background_transparency %}
+  {% assign text_position = block.settings.text_position %}
+  {% assign text_align = block.settings.text_align %}
+  {% assign mobile_text_below_image = block.settings.mobile_text_below_image %}
+  {% assign mobile_image_crop = block.settings.mobile_image_crop %}
+  {% assign button1 = block.settings.button1 %}
+  {% assign button1_link = block.settings.button1_link %}
+  {% assign button1_highlight = block.settings.button1_highlight %}
+  {% assign button2 = block.settings.button2 %}
+  {% assign button2_link = block.settings.button2_link %}
+  {% assign button2_highlight = block.settings.button2_highlight %}
+  {% assign mobile_text_color = block.settings.mobile_text_color %}
+{% else %}
+  {% assign id = section.id %}
+  {% assign wide_display = section.settings.wide_display %}
+  {% assign image = section.settings.image %}
+{% assign colour = section.settings.colour %}
+  {% assign pretext = section.settings.pretext %}
+  {% assign title = section.settings.title %}
+  {% assign subtitle = section.settings.subtitle %}
+  {% assign caption_background = section.settings.caption_background %}
+  {% assign caption_background_transparency = section.settings.caption_background_transparency %}
+  {% assign text_position = section.settings.text_position %}
+  {% assign text_align = section.settings.text_align %}
+  {% assign mobile_text_below_image = section.settings.mobile_text_below_image %}
+  {% assign mobile_image_crop = section.settings.mobile_image_crop %}
+  {% assign button1 = section.settings.button1 %}
+  {% assign button1_link = section.settings.button1_link %}
+  {% assign button1_highlight = section.settings.button1_highlight %}
+  {% assign button2 = section.settings.button2 %}
+  {% assign button2_link = section.settings.button2_link %}
+  {% assign button2_highlight = section.settings.button2_highlight %}
+  {% assign mobile_text_color = section.settings.mobile_text_color %}
+{% endif %}
+
+{% assign mobile_crop = 'mobile-banner--crop-' | append: mobile_image_crop %}
+
+{% comment %}Is the color set to transparent?{% endcomment %}
+{% assign mobile_text_alpha = mobile_text_color | color_extract: 'alpha' %}
+
+{% comment %}Section specific CSS{% endcomment %}
+{% style %}
+  @media only screen and (max-width: 480px) {
+    #shopify-section-{{ id }} .pretext,
+    #shopify-section-{{ id }} .headline,
+    #shopify-section-{{ id }} .subtitle,
+    .block__{{ id }} .pretext,
+    .block__{{ id }} .headline,
+    .block__{{ id }} .subtitle {
+      color: {% if mobile_text_alpha != 0 %}{{ mobile_text_color}}{% endif %};
+    }
+  }
+{% endstyle %}
+
+
+{% if wide_display == false %}
+<div class="container">
+  <div class="sixteen columns">
+{% endif %}
+
+<section id="banner-{{id}}" class="banner full-width--{{ wide_display }}">
+  {% if image != nil %}
+    {% render 'image-element',
+            image: image,
+            alt: image.alt,
+            stretch_width: true,
+            additional_classes: mobile_crop
+    %}
+  {% comment %}{% else %}
+    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--banner' }}{% endcomment %}
+  {% endif %}
+  {% unless button1_link != blank and button2_link != blank %}
+    {% if button1_link != blank and button1 == blank %}
+      <a href="{{ button1_link }}" class="banner-full-link">
+        {{ button1 }}
+      </a>
+    {% endif %}
+    {% if button2_link != blank and button2 == blank %}
+      <a href="{{ button2_link }}" class="banner-full-link">
+        {{ button2 }}
+      </a>
+    {% endif %}
+  {% endunless %}
+  {% unless pretext == blank and title == blank and subtitle == blank and button1 == blank and button2 == blank %}
+    <div class="position-{{ text_position }} caption js-caption caption--below-{{ mobile_text_below_image }}">
+      <div class="caption-content caption-background-{{ caption_background }} caption-transparency-{{ caption_background_transparency }} align-{{ text_align }}">
+        {% if pretext != blank %}
+          <div class="pretext"  style="color: {{section.settings.colour}}">
+            {{ pretext }}
+          </div>
+        {% endif %}
+        {% if title != blank %}
+          <h1 class="headline"  style="color: {{section.settings.colour}}">
+            {{ title }}
+          </h1>
+        {% endif %}
+        {% if subtitle != blank %}
+          <div class="subtitle"  style="color: {{section.settings.colour}}">
+            {{ subtitle }}
+          </div>
+        {% endif %}
+        {% if button1 != blank %}
+          <a {% if button1_link != blank %}href="{{ button1_link }}"{% endif %} class="action_button first_button highlight-{{ button1_highlight }}">
+            {{ button1 }}
+          </a>
+        {% endif %}
+        {% if button2 != blank %}
+          <a {% if button2_link != blank %}href="{{ button2_link }}"{% endif %} class="action_button second_button highlight-{{ button2_highlight }}">
+            {{ button2 }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  {% endunless %}
+</section>
+
+{% if wide_display == false %}
+  </div>
+</div>
+{% endif %}
+
+
+{% schema %}
+
+{
+  "name": "Mens Image text overlay",
+  "class": "image-with-text-overlay-section under-menu",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "wide_display",
+      "label": "Wide display",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1800 x 1000px recommended"
+    },
+{
+  "type": "color",
+  "id": "colour",
+  "label": "Text Color Picker",
+  "default": "#cccccc"
+},
+    {
+      "type": "richtext",
+      "id": "pretext",
+      "label": "Preheading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "caption_background",
+      "label": "Display solid text background",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "caption_background_transparency",
+      "label": "Enable background transparency"
+    },
+    {
+      "type": "text",
+      "id": "button1",
+      "label": "First button label"
+    },
+    {
+      "type": "url",
+      "id": "button1_link",
+      "label": "First button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button1_highlight",
+      "label": "Highlight first button"
+    },
+    {
+      "type": "text",
+      "id": "button2",
+      "label": "Second button label"
+    },
+    {
+      "type": "url",
+      "id": "button2_link",
+      "label": "Second button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button2_highlight",
+      "label": "Highlight second button"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_crop",
+      "label": "Image cropping",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_text_below_image",
+      "label": "Show text below image",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "mobile_text_color",
+      "label": "Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mens Image text overlay",
+      "category": "Image",
+      "settings": {
+        "image": "",
+        "title": "Your Headline",
+        "text_position": "center",
+        "text_align": "center"
+      }
+    }
+  ]
+}
+
+{% endschema %}

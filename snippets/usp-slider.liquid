@@ -1,0 +1,43 @@
+<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" rel="stylesheet"/>
+<div id="gallery">
+  {% if section.settings.usp_text != blank %}
+      <div class="usp-slider" style="background-color:{{ section.settings.usp_bg-color }};">
+        <a {% if section.settings.link != blank %}href="{{ section.settings.link }}"{% endif %} style="{{ section.settings.usp_color }};">{{ section.settings.usp_text }}</a>
+      </div>
+      {% endif %}
+      
+      {% if section.settings.usp_text2!= blank %}
+      <div class="usp-slider" style="background-color:{{ section.settings.usp_bg-color2 }};">
+        <a {% if section.settings.link2 != blank %}href="{{ section.settings.link2 }}"{% endif %} style="{{ section.settings.usp_color2 }};">{{ section.settings.usp_text2 }}</a>
+      </div>
+      {% endif %}
+      
+      {% if section.settings.usp_text3 != blank %}
+      <div class="usp-slider" style="background-color:{{ section.settings.usp_bg-color }};">
+        <a {% if section.settings.link3 != blank %}href="{{ section.settings.link3 }}"{% endif %} style="{{ section.settings.usp_color }};">{{ section.settings.usp_text3 }}</a>
+      </div>
+      {% endif %}
+      
+      {% if section.settings.usp_text4!= blank %}
+      <div class="usp-slider" style="background-color:{{ section.settings.usp_bg-color2 }};">
+        <a {% if section.settings.link4 != blank %}href="{{ section.settings.link4 }}"{% endif %} style="{{ section.settings.usp_color2 }};">{{ section.settings.usp_text4 }}</a>
+      </div>
+      {% endif %}      
+</div>
+
+
+
+<script>
+$('#gallery').slick({
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 0,
+  speed: 8000,
+  dots: false,
+  arrows : false,
+  pauseOnHover: true,
+  cssEase: 'linear'
+});
+</script>
