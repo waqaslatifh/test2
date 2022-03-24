@@ -1,0 +1,60 @@
+{% assign current_product = product %}
+{% assign length = current_product.title | split: ' ' | size | minus: 1 %}
+{% assign handle_no_colour = current_product.title | truncatewords: length | handle %}
+
+{% for c in product.collections %}
+    {% assign collection = c %}
+{% endfor %}
+
+{% comment %}
+    Only output swatches if product has a colour
+{% endcomment %}
+{% for product in collection.products %}
+
+    {% if product.handle contains handle_no_colour %}
+    
+        {% unless product.handle == current_product.handle %}
+
+            {% assign has_alts = true%}
+
+        {% endunless %}
+    	
+    {% endif %}
+
+{% endfor %}
+
+{% if has_alts %}
+
+    <div class="swatch clearfix">
+                
+        <div class="header product-page__label">
+            Colour <small class="colour-hover" style="display: none;"></small>
+        </div>
+
+        {% for product in collection.products %}
+
+            {% if product.handle contains handle_no_colour %}
+
+                {% assign colour = product.title | split: ' ' | last | handle %}
+
+                {% if colour == 'Gray' %}
+                    {% assign colour = 'Grey' %}
+                {% endif %}
+
+
+                <a href="{{ product.url }}" class="swatch-element color" data-color="{{ colour }}">
+
+                    {% comment %}<div class="tooltip">{{ colour }}</div>{% endcomment %}
+
+                    <label style="background-color: {{ colour }}; background-image: url({{ colour | prepend: 'color-colour_' | append: '.png' | asset_url }})">
+                    </label>
+
+                </a>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+{% endif %}

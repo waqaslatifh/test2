@@ -1,0 +1,44 @@
+          
+<!--<h2>Accordion</h2>-->
+
+<button class="accordion">More Detail</button>
+  <div class="panel">
+   {% assign my_description = product.description | split: '<!-- split -->'  %}
+    {{ my_description[1] }}
+  </div>
+
+  <button class="accordion">Shipping Information</button>
+    <div class="panel">
+      {% render 'accordion-shipping' %}
+    </div>
+
+    <!--      < span class="accordion-dummy"><a href="javascript:;" class="shipping_chart" data-fancybox data-src="#shipping-chart{{product.id}}" data-type="inline" data-no-instant>{{ 'products.product.shipping_chart' | t }} </a></span>
+         {% render 'popup-shipping-chart', product_id: product.id %}-->
+
+	<button class="accordion">Returns Information </button>
+      <div class="panel">
+       {% render 'accordion-returns' %}
+      </div>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>           
+      
+      
+      
+      
+      
+      

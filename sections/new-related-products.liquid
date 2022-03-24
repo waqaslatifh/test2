@@ -1,0 +1,1128 @@
+{% assign relatedCollection = collections['all'] %}
+{% assign index = 'now' | date: '%S' %}
+{% assign index = index | times: relatedCollection.products.size %}
+{% assign index = index | divided_by: 60 | times:2 %}
+
+{% comment %}
+<h1>index = {{index}}</h1>
+{% endcomment %}
+
+{% assign men = false %}
+{% assign women = false %}
+{% if product.tags contains 'gender_mens' %}
+  {% assign men = true %}
+{% endif %}
+
+{% if product.tags contains 'gender_womens' %}
+  {% assign women = true %}
+{% endif %}
+
+
+<div class="new_related_products">
+  <h2 class="text-center">{{section.settings.title}}</h2>
+ <div class="product-list collection-matrix is-flex is-flex-wrap equal-columns--outside-trim related_slider is-justify-center">
+  {% for tag in product.tags %}
+    {% assign Tag = tag | downcase %}
+   
+   <!-- start logic for footwear -->
+    {% if Tag == 'footwear' %}         
+   
+      {% assign only_once_1 = true %}
+      {% assign only_once_2 = true %}
+      {% assign only_once_3 = true %}
+      {% assign only_once_4 = true %}
+      {% assign only_once_5 = true %}
+
+   
+      {% paginate collections.all.products by 10000 %}
+        {% for product in collections.all.products offset: index %}
+         
+         {% for tag in product.tags %}
+          {% assign Tag1 = tag | downcase %}
+  
+          {% comment %}
+          {% if Tag1 contains 'aw' %}
+            {{Tag1}}-aww
+          {% endif %}
+          {% endcomment %}
+  
+  
+  
+          {% if Tag1 == 'legwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+              {% if only_once_1 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_1 = false %}
+              {% endif %}
+                
+               
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+              {% if only_once_2 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_2 = false %}
+               {% endif %}
+               
+               
+             {% endif %}  
+            {% endif %}
+  
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'socks' %}
+            
+           {% if product.tags contains 'AW21' or product.tags contains 'aw21'%}
+   
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_3 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_3 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+               {% if only_once_4 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_4 = false %}
+               {% endif %}
+              
+              
+             {% endif %}  
+            {% endif %}
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'jason markk' %}
+   
+          
+  
+             {% if only_once_5 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_5 = false %}
+              {% endif %}
+               
+           {% endif %}
+         
+  
+         {% endfor %}
+        {% endfor %}
+      {% assign dm_paginate_by = paginate.page_size %}{% endpaginate %}
+    {% endif %}         
+   <!-- end logic for footwear -->
+   
+   
+   <!-- start logic for headwear -->
+    {% if Tag == 'headwear' %}         
+   
+      {% assign only_once_1 = true %}
+      {% assign only_once_2 = true %}
+      {% assign only_once_3 = true %}
+      {% assign only_once_4 = true %}
+      {% assign only_once_5 = true %}
+      {% assign only_once_6 = true %}
+
+   
+      {% paginate collections.all.products by 10000 %}
+        {% for product in collections.all.products offset: index %}
+         
+         {% for tag in product.tags %}
+          {% assign Tag1 = tag | downcase %}
+  
+          {% comment %}
+          {% if Tag1 contains 'aw' %}
+            {{Tag1}}-aww
+          {% endif %}
+          {% endcomment %}
+  
+  
+  
+          {% if Tag1 == 'jackets&midlayers' or Tag1 == 'jackets & midlayers' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+              {% if only_once_1 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_1 = false %}
+              {% endif %}
+                
+               
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+              {% if only_once_2 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_2 = false %}
+               {% endif %}
+               
+               
+             {% endif %}  
+            {% endif %}
+  
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'legwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_3 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_3 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+               {% if only_once_4 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_4 = false %}
+               {% endif %}
+              
+              
+             {% endif %}  
+            {% endif %}
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'outerwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_5 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_5 = false %}
+              {% endif %}
+             {% endif %}
+            {% endif %}
+   
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+             {% if only_once_6 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_6 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}   
+   
+   
+            {% endif %}
+          {% endif %}  
+  
+         {% endfor %}
+        {% endfor %}
+      {% assign dm_paginate_by = paginate.page_size %}{% endpaginate %}
+    {% endif %}         
+   <!-- end logic for headwear --> 
+   
+   
+    <!-- start logic for knitwear -->
+    {% if Tag == 'knitwear' %}         
+   
+      {% assign only_once_1 = true %}
+      {% assign only_once_2 = true %}
+      {% assign only_once_3 = true %}
+      {% assign only_once_4 = true %}
+      {% assign only_once_5 = true %}
+      {% assign only_once_6 = true %}
+
+   
+      {% paginate collections.all.products by 10000 %}
+        {% for product in collections.all.products offset: index %}
+         
+         {% for tag in product.tags %}
+          {% assign Tag1 = tag | downcase %}
+  
+          {% comment %}
+          {% if Tag1 contains 'aw' %}
+            {{Tag1}}-aww
+          {% endif %}
+          {% endcomment %}
+  
+  
+  
+          {% if Tag1 == 'jackets&midlayers' or Tag1 == 'jackets & midlayers' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+              {% if only_once_1 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_1 = false %}
+              {% endif %}
+                
+               
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+              {% if only_once_2 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_2 = false %}
+               {% endif %}
+               
+               
+             {% endif %}  
+            {% endif %}
+  
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'socks' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_3 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_3 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+               {% if only_once_4 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_4 = false %}
+               {% endif %}
+              
+              
+             {% endif %}  
+            {% endif %}
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'headwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_5 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_5 = false %}
+              {% endif %}
+             {% endif %}
+            {% endif %}
+   
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+             {% if only_once_6 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_6 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}   
+   
+   
+            {% endif %}
+          {% endif %}  
+  
+         {% endfor %}
+        {% endfor %}
+      {% assign dm_paginate_by = paginate.page_size %}{% endpaginate %}
+    {% endif %}         
+   <!-- end logic for knitwear -->   
+   
+   
+     <!-- start logic for legwear -->
+    {% if Tag == 'legwear' %}         
+   
+      {% assign only_once_1 = true %}
+      {% assign only_once_2 = true %}
+      {% assign only_once_3 = true %}
+      {% assign only_once_4 = true %}
+      {% assign only_once_5 = true %}
+      {% assign only_once_6 = true %}
+
+   
+      {% paginate collections.all.products by 10000 %}
+        {% for product in collections.all.products offset: index %}
+         
+         {% for tag in product.tags %}
+          {% assign Tag1 = tag | downcase %}
+  
+          {% comment %}
+          {% if Tag1 contains 'aw' %}
+            {{Tag1}}-aww
+          {% endif %}
+          {% endcomment %}
+  
+  
+  
+          {% if Tag1 == 'footwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+              {% if only_once_1 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_1 = false %}
+              {% endif %}
+                
+               
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+              {% if only_once_2 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_2 = false %}
+               {% endif %}
+               
+               
+             {% endif %}  
+            {% endif %}
+  
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'socks' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_3 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_3 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+               {% if only_once_4 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_4 = false %}
+               {% endif %}
+              
+              
+             {% endif %}  
+            {% endif %}
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'outerwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_5 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_5 = false %}
+              {% endif %}
+             {% endif %}
+            {% endif %}
+   
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+             {% if only_once_6 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_6 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}   
+   
+   
+            {% endif %}
+          {% endif %}  
+  
+         {% endfor %}
+        {% endfor %}
+      {% assign dm_paginate_by = paginate.page_size %}{% endpaginate %}
+    {% endif %}         
+   <!-- end logic for legwear -->  
+   
+   
+    <!-- start logic for t-shirts -->
+    {% if Tag == 't-shirts' %}         
+   
+      {% assign only_once_1 = true %}
+      {% assign only_once_2 = true %}
+      {% assign only_once_3 = true %}
+      {% assign only_once_4 = true %}
+      {% assign only_once_5 = true %}
+      {% assign only_once_6 = true %}
+
+   
+      {% paginate collections.all.products by 10000 %}
+        {% for product in collections.all.products offset: index %}
+         
+         {% for tag in product.tags %}
+          {% assign Tag1 = tag | downcase %}
+  
+          {% comment %}
+          {% if Tag1 contains 'aw' %}
+            {{Tag1}}-aww
+          {% endif %}
+          {% endcomment %}
+  
+  
+  
+          {% if Tag1 == 'hoods&sweats' or Tag1 == 'hoods & sweats' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+              {% if only_once_1 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_1 = false %}
+              {% endif %}
+                
+               
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+              {% if only_once_2 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_2 = false %}
+               {% endif %}
+               
+               
+             {% endif %}  
+            {% endif %}
+  
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'legwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_3 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_3 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+               {% if only_once_4 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_4 = false %}
+               {% endif %}
+              
+              
+             {% endif %}  
+            {% endif %}
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'headwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_5 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_5 = false %}
+              {% endif %}
+             {% endif %}
+            {% endif %}
+   
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+             {% if only_once_6 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_6 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}   
+   
+   
+            {% endif %}
+          {% endif %}  
+  
+         {% endfor %}
+        {% endfor %}
+      {% assign dm_paginate_by = paginate.page_size %}{% endpaginate %}
+    {% endif %}         
+   <!-- end logic for t-shirts -->    
+   
+   
+    <!-- start logic for jackets&midlayers -->
+    {% if Tag == 'jackets&midlayers' or Tag == 'jackets & midlayers' %}         
+   
+      {% assign only_once_1 = true %}
+      {% assign only_once_2 = true %}
+      {% assign only_once_3 = true %}
+      {% assign only_once_4 = true %}
+      {% assign only_once_5 = true %}
+      {% assign only_once_6 = true %}
+
+   
+      {% paginate collections.all.products by 10000 %}
+        {% for product in collections.all.products offset: index %}
+         
+         {% for tag in product.tags %}
+          {% assign Tag1 = tag | downcase %}
+  
+          {% comment %}
+          {% if Tag1 contains 'aw' %}
+            {{Tag1}}-aww
+          {% endif %}
+          {% endcomment %}
+  
+  
+  
+          {% if Tag1 == 't-shirts' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+              {% if only_once_1 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_1 = false %}
+              {% endif %}
+                
+               
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+              {% if only_once_2 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_2 = false %}
+               {% endif %}
+               
+               
+             {% endif %}  
+            {% endif %}
+  
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'legwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_3 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_3 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+               {% if only_once_4 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_4 = false %}
+               {% endif %}
+              
+              
+             {% endif %}  
+            {% endif %}
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'outerwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_5 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_5 = false %}
+              {% endif %}
+             {% endif %}
+            {% endif %}
+   
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+             {% if only_once_6 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_6 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}   
+   
+   
+            {% endif %}
+          {% endif %}  
+  
+         {% endfor %}
+        {% endfor %}
+      {% assign dm_paginate_by = paginate.page_size %}{% endpaginate %}
+    {% endif %}         
+   <!-- end logic for jackets&midlayers -->    
+   
+   
+     <!-- start logic for shirts -->
+    {% if Tag == 'shirts' %}         
+   
+      {% assign only_once_1 = true %}
+      {% assign only_once_2 = true %}
+      {% assign only_once_3 = true %}
+      {% assign only_once_4 = true %}
+      {% assign only_once_5 = true %}
+      {% assign only_once_6 = true %}
+
+   
+      {% paginate collections.all.products by 10000 %}
+        {% for product in collections.all.products offset: index %}
+         
+         {% for tag in product.tags %}
+          {% assign Tag1 = tag | downcase %}
+  
+          {% comment %}
+          {% if Tag1 contains 'aw' %}
+            {{Tag1}}-aww
+          {% endif %}
+          {% endcomment %}
+  
+  
+  
+          {% if Tag1 == 'legwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+              {% if only_once_1 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_1 = false %}
+              {% endif %}
+                
+               
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+              {% if only_once_2 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_2 = false %}
+               {% endif %}
+               
+               
+             {% endif %}  
+            {% endif %}
+  
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'footwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_3 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_3 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+               {% if only_once_4 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_4 = false %}
+               {% endif %}
+              
+              
+             {% endif %}  
+            {% endif %}
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'outerwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_5 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_5 = false %}
+              {% endif %}
+             {% endif %}
+            {% endif %}
+   
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+             {% if only_once_6 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_6 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}   
+   
+   
+            {% endif %}
+          {% endif %}  
+  
+         {% endfor %}
+        {% endfor %}
+      {% assign dm_paginate_by = paginate.page_size %}{% endpaginate %}
+    {% endif %}         
+   <!-- end logic for shirts --> 
+   
+   
+     <!-- start logic for outerwear -->
+    {% if Tag == 'outerwear' %}         
+   
+      {% assign only_once_1 = true %}
+      {% assign only_once_2 = true %}
+      {% assign only_once_3 = true %}
+      {% assign only_once_4 = true %}
+      {% assign only_once_5 = true %}
+      {% assign only_once_6 = true %}
+
+   
+      {% paginate collections.all.products by 10000 %}
+        {% for product in collections.all.products offset: index %}
+         
+         {% for tag in product.tags %}
+          {% assign Tag1 = tag | downcase %}
+  
+          {% comment %}
+          {% if Tag1 contains 'aw' %}
+            {{Tag1}}-aww
+          {% endif %}
+          {% endcomment %}
+  
+  
+  
+          {% if Tag1 == 'trouser' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21'  %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+              {% if only_once_1 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_1 = false %}
+              {% endif %}
+                
+               
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+              {% if only_once_2 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+               {% assign only_once_2 = false %}
+               {% endif %}
+               
+               
+             {% endif %}  
+            {% endif %}
+  
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'socks' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_3 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_3 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}
+  
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+               {% if only_once_4 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_4 = false %}
+               {% endif %}
+              
+              
+             {% endif %}  
+            {% endif %}
+           {% endif %}
+          {% endif %}
+          
+          {% if Tag1 == 'footwear' %}
+           {% if product.tags contains 'aw21' or product.tags contains 'AW21' %}
+            {% if men %}
+             {% if product.tags contains 'gender_mens' %}
+             {% if only_once_5 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_5 = false %}
+              {% endif %}
+             {% endif %}
+            {% endif %}
+   
+            {% if women %}
+             {% if product.tags contains 'gender_womens' %}
+             {% if only_once_6 %}
+               {% render 'product-thumbnail',
+                product: product,
+                products_per_row: 4,
+                sidebar: false
+               %}
+              {% assign only_once_6 = false %}
+              {% endif %}
+               
+              
+             {% endif %}
+            {% endif %}   
+   
+   
+            {% endif %}
+          {% endif %}  
+  
+         {% endfor %}
+        {% endfor %}
+      {% assign dm_paginate_by = paginate.page_size %}{% endpaginate %}
+    {% endif %}         
+   <!-- end logic for outerwear -->    
+   
+   
+   
+   
+   
+  {% endfor %}
+</div>
+</div>
+{% comment %}
+<script>
+  $(document).ready(function(){
+    if($(window).width() <= 798){
+    $('.related_slider').flickity({
+      // options
+      pageDots: true,
+      groupCells: true, 
+      contain: true
+    });
+    }
+  });
+</script>
+{% endcomment %}
+
+{% if dm_paginate_by %}{% render 'spurit_dmr_collection_template_snippet', paginate_by: dm_paginate_by %}{% endif %}{% schema %}
+  {
+    "name": "New Related Products",
+    "settings": [
+     {
+       "type":"text",
+       "id":"title",
+       "label":"Title"
+     }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

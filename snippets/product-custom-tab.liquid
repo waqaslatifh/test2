@@ -1,0 +1,350 @@
+{% comment %}
+	if combine_pretext is false, the text before the first <h6> will be shown above all tabs, otherwise added to the first tab
+{% endcomment %}
+{% assign combine_pretext = false %}
+
+{% assign description = tabbed-description | default: product.description %}
+
+	{% assign tab_heads = '' %}
+	{% assign tab_texts = '' %}
+	{% assign pretext = '' %}
+
+	{% assign chunks = description | strip | split: "<h6>" %}
+	{% for c in chunks %}
+		{% if c contains "</h6>" %}
+			{% assign chunk = c | split: "</h6>" %}
+			{% assign tab_heads = tab_heads | append: ",," | append: chunk.first %}
+			{% assign tab_texts = tab_texts | append: ",," %}
+			{% if pretext != blank  and combine_pretext %}
+				{% assign tab_texts = tab_texts | append: pretext | append: "<br>" %}
+				{% assign pretext = '' %}
+			{% endif %}
+			{% assign tab_texts = tab_texts | append: chunk.last  %}
+		{% elsif forloop.first %}
+			{% assign pretext =  c %}
+		{% endif %}
+	{% endfor %}
+
+	{% assign tab_heads = tab_heads | remove_first: ",," | split: ",," %}
+	{% assign tab_texts = tab_texts | remove_first: ",," | split: ",," %}
+
+	{% assign index =  1  %}
+	<div class="product-custom-tab">
+      {% if pretext != blank and combine_pretext == false %}
+      <span class=pretext style="display: none;">{{ pretext }}</span>
+      {% endif %}
+	  <ul class="tabs">
+	  	{% for head in tab_heads %}
+	  		<li rel="tab{{forloop.index}}" class="{% if forloop.first %}active{% endif %}">{{head}}</li>
+		 	{% assign index =  index | plus: 1  %}
+	  	{% endfor %}
+        
+        <li rel="tab1" class="active">{{ settings.tab1title }}</li>
+        <li rel="tab2">{{ settings.tab2title }}</li>
+        <li rel="tab3">{{ settings.tab3title }}</li>
+        
+	  </ul>
+      
+      <div class="tab_container">
+	  {% assign index =  1  %}
+	  {% for text in tab_texts %}
+        <span class="tab_drawer_heading {% if forloop.first %}d_active{% endif %}" rel="tab{{forloop.index}}">{{tab_heads[forloop.index0]}}</span>
+	  	<div id="tab{{- index -}}" class="tab_content">
+          
+          {{ text }}</div>
+	 	{% assign index =  index | plus: 1  %}
+	  {% endfor %}
+        
+  
+        
+        {% if settings.tab1title != blank %}
+        <span class="tab_drawer_heading"  rel="tab1">{{ settings.tab1title }}</span>
+        <div id="tab1" class="tab_content">
+         {{ description }}
+        </div>
+        {% endif %}
+        
+        
+        
+        {% if settings.tab2title != blank %}
+        <span class="tab_drawer_heading"  rel="tab2">{{ settings.tab2title }}</span>
+        <div id="tab2" class="tab_content">
+         {{ settings.tab2text }}
+        </div>
+        {% endif %}
+        
+        {% if settings.tab3title != blank %}
+        <span class="tab_drawer_heading"  rel="tab3">{{ settings.tab3title }}</span>
+        <div id="tab3" class="tab_content">
+          {{ settings.tab3text }}
+        </div>
+        {% endif %}
+        
+      </div>
+      
+  	</div>
+
+<style>
+ul.tabs {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	height: 20px;
+	width: 100%;
+   text-align: center;
+  	border-bottom: none;
+}
+
+ul.tabs li {
+	display: inline-block;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+    height: 20px;
+    line-height:20px;
+    padding: 0px 10px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+  	font-family: Montserrat,sans-serif;
+    color: #000;
+}
+
+.tab_last { border-right: 1px solid #333; }
+
+ul.tabs li:hover {
+	background-color: #ccc;
+	color: #333;
+}
+
+ul.tabs li.active {
+	background-color: rgba(0, 0, 0, 0.7);
+    border-color: transparent;
+    color: #fff;
+}
+
+.tab_container {
+	border:none;
+	border-top: none;
+	clear: both;
+	float: left;
+	width: 100%;
+	background: transparent;
+	overflow: auto;
+  	margin-bottom: 50px;
+}
+
+.tab_content {
+	padding: 0px;
+	display: none;
+}
+  .tab_content p {
+    line-height: 25px;
+}
+
+.tab_drawer_heading { display: none; }
+div#tab3 ul, div#tab2 ul
+  {
+  padding-left: 0px;
+  margin-left: 0px;  
+  margin-top: 0px;
+  border-top: none;  
+  }
+div#tab3 .services-name
+  {
+  display: inline-block;
+  margin-top: 20px;
+  }
+  .tab_content a {
+    color: #00b67a;
+}
+
+@media screen and (max-width: 590px) {
+.tab_container
+  	{
+    margin-top: 30px;
+    }
+	.tabs {
+		display: none;
+	}
+	.tab_drawer_heading {
+ 		background-color: #ffffff;
+		color: #000;
+		border-top: 1px solid #ddd;
+		margin: 0;
+		padding: 10px 20px;
+		display: block;
+		cursor: pointer;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+      	letter-spacing: 0.5px;
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: uppercase; 
+        position: relative;
+      	display: none;
+	}
+.tab_drawer_heading::after, .tab_drawer_heading::before 
+  	{
+	position: absolute;
+    margin-top: 0;
+    right: 20px;
+    top: 50%;
+    content: "";
+    width: 10px;
+    height: 2px;
+    background: #000000;
+    transition: all 0.5s cubic-bezier(.39,.58,.57,1);
+    -webkit-transition: all 0.5s cubic-bezier(.39,.58,.57,1);
+    -moz-transition: all 0.5s cubic-bezier(.39,.58,.57,1);
+    -ms-transition: all 0.5s cubic-bezier(.39,.58,.57,1);
+    -o-transition: all 0.5s cubic-bezier(.39,.58,.57,1); 
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);  
+    z-index: 1;  
+	}
+.tab_drawer_heading::after 
+  	{
+	transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    right: 14px;  
+	}
+.tab_drawer_heading.d_active::before
+	{
+    opacity: 0;
+    transform: translateX(-10px);
+    -webkit-transform: translateX(-10px);
+    -moz-transform: translateX(-10px);
+    -ms-transform: translateX(-10px);
+    -o-transform: translateX(-10px);  
+    }
+.tab_drawer_heading.d_active::after 
+  	{
+	transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);  
+    right: 18px;  
+    background-color: #ffffff;  
+	}  
+	.d_active {
+		background-color: #ff6f00;
+		color: #fff;
+	}
+div#tab3 ul
+   {
+   margin-top: 0px;
+   }
+  .product_section .description {
+  margin-top: 35px;
+  }
+}  
+</style>
+
+<script>
+  
+$(document).ready(function(){  
+ // tabbed content
+    // http://www.entheosweb.com/tutorials/css/tabs.asp
+    $(".tab_content").hide();
+    $(".tab_content:first").show();
+
+  /* if in tab mode */
+    $("ul.tabs li").click(function() {
+		
+      $(".tab_content").hide();
+      var activeTab = $(this).attr("rel"); 
+      $("#"+activeTab).fadeIn();		
+		
+      $("ul.tabs li").removeClass("active");
+      $(this).addClass("active");
+
+	  $(".tab_drawer_heading").removeClass("d_active");
+	  $(".tab_drawer_heading[rel^='"+activeTab+"']").addClass("d_active");
+	  
+    });
+	/* if in drawer mode */
+	$(".tab_drawer_heading").click(function() {
+      
+      $(".tab_content").hide();
+      var d_activeTab = $(this).attr("rel"); 
+      $("#"+d_activeTab).slideDown();
+	  
+	  $(".tab_drawer_heading").removeClass("d_active");
+      $(this).addClass("d_active");
+	  
+	  $("ul.tabs li").removeClass("active");
+	  $("ul.tabs li[rel^='"+d_activeTab+"']").addClass("active");
+    });
+	
+	
+	/* Extra class "tab_last" 
+	   to add border to right side
+	   of last tab */
+	$('ul.tabs li').last().addClass("tab_last");
+ 
+});    
+	
+</script>
+
+<script>
+  
+$(document).on('shopify:section:load',function(){  
+ // tabbed content
+    // http://www.entheosweb.com/tutorials/css/tabs.asp
+    $(".tab_content").hide();
+    $(".tab_content:first").show();
+
+  /* if in tab mode */
+    $("ul.tabs li").click(function() {
+		
+      $(".tab_content").hide();
+      var activeTab = $(this).attr("rel"); 
+      $("#"+activeTab).fadeIn();		
+		
+      $("ul.tabs li").removeClass("active");
+      $(this).addClass("active");
+
+	  $(".tab_drawer_heading").removeClass("d_active");
+	  $(".tab_drawer_heading[rel^='"+activeTab+"']").addClass("d_active");
+	  
+    });
+	/* if in drawer mode */
+	$(".tab_drawer_heading").click(function() {
+      
+      $(".tab_content").hide();
+      var d_activeTab = $(this).attr("rel"); 
+      $("#"+d_activeTab).slideDown();
+	  
+	  $(".tab_drawer_heading").removeClass("d_active");
+      $(this).addClass("d_active");
+	  
+	  $("ul.tabs li").removeClass("active");
+	  $("ul.tabs li[rel^='"+d_activeTab+"']").addClass("active");
+    });
+	
+	
+	/* Extra class "tab_last" 
+	   to add border to right side
+	   of last tab */
+	$('ul.tabs li').last().addClass("tab_last");
+ 
+});    
+	
+</script>
+
+
+
+	

@@ -1,0 +1,35 @@
+<div class="icon-flex">
+{% for tag in product.tags %}
+	{% if tag contains 'icons_recycled' %}
+		<a href="https://www.theunionproject.com/pages/icons" ><img class="icons-wh" src="https://cdn.shopify.com/s/files/1/1204/9844/files/icons_recycled.png?v=1605537734"/></a>
+
+	{% elsif tag contains 'icons_fairtrade' %}
+		<a href="https://www.theunionproject.com/pages/icons" ><img class="icons-wh"  src="https://cdn.shopify.com/s/files/1/1204/9844/files/icons_fairtrade.png?v=1605537734"/></a>
+
+	{% elsif tag contains 'icons_vegan' %}
+		<a href="https://www.theunionproject.com/pages/icons" ><img class="icons-wh"  src="https://cdn.shopify.com/s/files/1/1204/9844/files/icons_vegan.png?v=1626169094"/></a>
+
+	{% elsif tag contains 'icons_traceable' %}
+		<a href="https://www.theunionproject.com/pages/icons" ><img class="icons-wh" src="https://cdn.shopify.com/s/files/1/1204/9844/files/icons_traceable.png?v=1605537734"/></a>
+
+	{% elsif tag contains 'icons_leatheralternative' %}
+		<a href="https://www.theunionproject.com/pages/icons" ><img class="icons-wh" src="https://cdn.shopify.com/s/files/1/1204/9844/files/icons_leatheralternative.png?v=1626168788"/></a>
+
+	{% elsif tag contains 'icons_freerepairs' %}
+		<a href="https://www.theunionproject.com/pages/icons" ><img class="icons-wh"  src="https://cdn.shopify.com/s/files/1/1204/9844/files/icons_freerepairs.png?v=1626168256"/></a>
+
+	{% elsif tag contains 'iconsmadeinuk' %}
+		<a href="https://www.theunionproject.com/pages/icons" ><img class="icons-wh" src="https://cdn.shopify.com/s/files/1/0497/9648/1185/files/fairtrade-test.png?v=1604419335"/></a>
+
+	{% elsif tag contains 'icons_madeineu' %}
+		<a href="https://www.theunionproject.com/pages/icons" ><img class="icons-wh" src="https://cdn.shopify.com/s/files/1/1204/9844/files/icons_fmadeineu.png?v=1614763731"/></a>
+
+    {% elsif tag contains 'icons_peta' %}
+		<a href="https://www.theunionproject.com/pages/icons" ><img class="icons-wh" src="https://cdn.shopify.com/s/files/1/1204/9844/files/icons_peta.png?v=1605537734"/></a>
+
+    {% elsif tag contains 'icons_organic' %}
+		<a href="https://www.theunionproject.com/pages/icons" ><img class="icons-wh" src="https://cdn.shopify.com/s/files/1/1204/9844/files/icons_organic.png?v=1626104038"/></a>
+
+	{% endif %}
+{% endfor %}
+</div>

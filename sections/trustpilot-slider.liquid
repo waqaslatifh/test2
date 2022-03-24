@@ -1,0 +1,243 @@
+<div class="trustpilot_slider">
+  <section class="trustpilot-section">
+    
+    <div class="container">
+      <div class="one-whole column">
+        <div class="trustpilot-header">
+        <h2>{{section.settings.title}}</h2>
+          <div class="trustpilot-brand is-hidden-mobile-only">
+        	{% if section.settings.trustpilot-logo != blank %}
+      	 	<img class="trustpilot-logo" src="{{section.settings.trustpilot-logo | img_url:'master'}}">
+           {% elsif section.settings.trustpilot-logosvg != blank %}
+          	<img src="{{ section.settings.trustpilot-logosvg | asset_url }}" class="trustpilot-logo" alt="{{ section.settings.trustpilot-logosvg.alt | default: shop.name }}">          	
+            {% endif %}
+            <span class="rating-star"> 
+              {% if section.settings.trustpilot-rating-s != blank %}
+      	 	<img class="trustpilot-s" src="{{section.settings.trustpilot-rating-s | img_url:'master'}}">
+           {% elsif section.settings.trustpilot-rating-svg != blank %}
+          	<img src="{{ section.settings.trustpilot-rating-svg | asset_url }}" class="trustpilot-s" alt="{{ section.settings.trustpilot-rating-svg.alt | default: shop.name }}">
+          	 <br>
+            {% endif %}
+              <span>
+              {{section.settings.trustpilot-name }}
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="trust_slider-main">
+    <div class="trust_slider">
+     {% for block in section.blocks %}
+      {%- assign testimonial = block.settings.testimonial -%}
+       <div class="carousel-cell">
+         <div class="trustpilot-card">
+           
+           {% if block.settings.rating_image != blank %}
+      	 	<img class="trustpilot-rating" src="{{block.settings.rating_image | img_url:'master'}}">
+           {% elsif block.settings.rating_image-svg != blank %}
+          	<img src="{{ block.settings.rating_image-svg | asset_url }}" class="trustpilot-rating" alt="{{ block.settings.rating_image-svg.alt | default: shop.name }}">
+          	 
+            {% endif %}
+           	<div class="trustpilot-text">
+                    {{ testimonial }}                    
+            </div>
+           {% if block.settings.user_image != blank %}
+           <div class="user-info">
+             {% if block.settings.user_image != blank %}
+             <img src="{{block.settings.user_image | img_url:'master'}}">
+             {% endif %} 
+             {% if block.settings.name != blank %}
+           		<p>                
+                   {{ block.settings.name }}                                   
+              </p>
+              {% endif %}  
+           </div>
+            {% endif %}  
+           	
+         </div>
+       </div>
+     {% endfor %}
+    </div>
+    </div>
+    
+    <div class="trustpilot-brand is-hidden-desktop-only">
+        	{% if section.settings.trustpilot-logo != blank %}
+      	 	<img class="trustpilot-logo" src="{{section.settings.trustpilot-logo | img_url:'master'}}">
+           {% elsif section.settings.trustpilot-logosvg != blank %}
+          	<img src="{{ section.settings.trustpilot-logosvg | asset_url }}" class="trustpilot-logo" alt="{{ section.settings.trustpilot-logosvg.alt | default: shop.name }}">          	
+            {% endif %}
+            <span class="rating-star"> 
+              {% if section.settings.trustpilot-rating-s != blank %}
+      	 	<img class="trustpilot-s" src="{{section.settings.trustpilot-rating-s | img_url:'master'}}">
+           {% elsif section.settings.trustpilot-rating-svg != blank %}
+          	<img src="{{ section.settings.trustpilot-rating-svg | asset_url }}" class="trustpilot-s" alt="{{ section.settings.trustpilot-rating-svg.alt | default: shop.name }}">
+          	 <br>
+            {% endif %}
+              <span>
+              {{section.settings.trustpilot-name }}
+              </span>
+            </span>
+          </div>
+    
+  </section>
+</div>
+
+<style>
+  {% if section.settings.section_bg != blank %}
+  #shopify-section-{{ section.id }} .trustpilot_slider {
+  background: {{ section.settings.section_bg }};
+  padding: 50px 0px;  
+  }
+  {% endif %}
+ {% if section.settings.section_text-color != blank %}
+  #shopify-section-{{ section.id }} .trustpilot-header h2, 
+  #shopify-section-{{ section.id }} .trustpilot-brand .rating-star {
+  color: {{ section.settings.section_text-color }}
+  }
+  {% endif %}
+  
+  {% if section.settings.card_bg != blank %}
+      #shopify-section-{{ section.id }} .trustpilot-card {
+      background: {{ section.settings.card_bg }}; 
+      }
+  {% endif %}
+  {% if section.settings.card_text-color != blank %}
+      #shopify-section-{{ section.id }} .trustpilot-text p, 
+      #shopify-section-{{ section.id }} .user-info p {
+      color: {{ section.settings.card_text-color }}
+      }
+      {% endif %}
+  
+</style>
+
+<script>
+  $(document).ready(function(){
+    $('.trust_slider').flickity({
+      // options
+      pageDots: true,
+      groupCells: true, 
+      contain: true
+    });    
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Trustpiot Slider",
+    "settings": [
+	 {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section Background",
+      "default": "#ffffff"		
+    },
+	{
+      "type": "color",
+      "id": "section_text-color",
+      "label": "Section Heading",
+      "default": "#ffffff"		
+    },
+	{
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background",
+      "default": "#ffffff"		
+    },
+	{
+      "type": "color",
+      "id": "card_text-color",
+      "label": "Section Heading",
+      "default": "#000000"		
+    },
+     {
+      "type":"text",
+      "id":"title",
+      "label":"Title"
+     },
+	 {
+      "type":"text",
+      "id":"trustpilot-name",
+      "label":"Reviews"
+     },	
+     {
+      "type":"image_picker",
+      "id":"trustpilot-logo",
+      "label":"Trustpilot Logo"
+     },
+	 {
+       "type": "text",
+       "id": "trustpilot-logosvg",
+       "label": "Trustpilot logo svg",
+       "info": "Upload SVG logo at 'Edit Code > Assets' then use same name here. Ex: tup-logo.svg."
+     },
+	 {
+      "type":"image_picker",
+      "id":"trustpilot-rating-s",
+      "label":"Trustpilot Rating"
+     },
+	 {
+       "type": "text",
+       "id": "trustpilot-rating-svg",
+       "label": "Trustpilot Rating svg",
+       "info": "Upload SVG logo at 'Edit Code > Assets' then use same name here. Ex: tup-logo.svg."
+     }
+    ],
+    "blocks": [
+      {
+        "type": "slide", 
+        "name": "slide", 
+        "settings": [
+
+          {
+            "type": "checkbox",
+            "id": "enable_slide",
+            "label": "Enable Slide",
+            "default":true
+          },
+          {
+            "type": "image_picker",
+            "id": "rating_image",
+            "label": "Rating StarS"
+          },
+	      {
+             "type": "text",
+             "id": "rating_image-svg",
+             "label": "Trustpilot Rating svg",
+             "info": "Upload SVG logo at 'Edit Code > Assets' then use same name here. Ex: tup-logo.svg."
+           },
+		  {
+          "type": "richtext",
+          "id": "testimonial",
+          "label": "Testimonial",
+          "default": "<p>Include some of your favorite customer quotes and feedback here as social proof, to build credibility and trust for your services and products.</p>"
+          },
+		  {
+            "type": "image_picker",
+            "id": "user_image",
+            "label": "User Image"
+          },	
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Customer name"
+          }	
+       
+        ]
+      }
+   ],
+  "presets": [
+    {
+      "name": "Trustpiot Slider",
+      "category": "Image"
+    }
+  ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

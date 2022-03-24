@@ -1,0 +1,16 @@
+{% if section.settings.service_enable %}      
+<div class="tobbar-container">
+    <div class="tobbar-row">
+       {% for block in section.blocks %}
+      	<div class="col-tb">
+           {% if block.settings.branlogo != blank %}
+      	 	<img class="tobbar-logo" src="{{block.settings.branlogo | img_url:'master'}}">
+           {% else block.settings.logosvg != blank %}
+          	<img src="{{ block.settings.branlogosvg | asset_url }}" class="tobbar-logo" alt="{{ block.settings.branlogosvg.alt | default: shop.name }}">
+          	{% endif %}
+      	</div>
+       {% endfor %}
+        
+    </div>
+</div>
+{% endif %}  

@@ -1,0 +1,79 @@
+<script
+  type="application/json"
+  data-section-type="featured-text"
+  data-section-id="{{ section.id }}"
+>
+</script>
+
+{% style %}
+  {%
+    render 'css-loop',
+    css: section.settings.custom_css,
+    id: section.id
+  %}
+{% endstyle %}
+
+<section class="section info-rich-text">
+  <div class="{% if section.settings.wide_display == true %} container{% else %}rich-container container{% endif %}">
+    <div class="one-whole column">
+      <div class="rich-text__content {{ section.settings.text_alignment }}">
+        
+        {% if section.settings.title != blank %}
+          <h3 class="rich-text__heading-subtitle">
+            {{ section.settings.title | escape }}
+          </h3>
+          
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Info Sub Title",
+  "class": "shopify-section--rich-text-and-image",
+  "settings": [
+	{
+      "type": "checkbox",
+      "id": "wide_display",
+      "label": "Wide display",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Sub Heading",
+      "default": "Sub Talk about your brand"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "align_left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Info Sub Title",
+      "category": "Text"
+    }
+  ],
+  "templates": [
+    "index",
+    "product",
+    "page"
+  ]
+}
+
+{% endschema %}

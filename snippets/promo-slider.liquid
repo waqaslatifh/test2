@@ -1,0 +1,21 @@
+<div class="courses cf" id="featured-courses">
+  	<div class="course-item slide">
+       {{ section.settings.promo_slid-text1 }}
+    </div>
+    <div class="course-item slide">
+       {{ section.settings.promo_slid-text2 }}
+    </div>
+    <div class="course-item slide">
+       {{ section.settings.promo_slid-text3 }}
+    </div>
+  {% if section.settings.promo_slid-text4 != blank %}
+  <div class="course-item slide">
+       {{ section.settings.promo_slid-text4 }}
+    </div>
+   {% endif %}
+  {% if section.settings.promo_slid-text5 != blank %}
+  <div class="course-item slide">
+       {{ section.settings.promo_slid-text5 }}
+    </div>
+   {% endif %}
+  </div>

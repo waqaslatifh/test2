@@ -1,0 +1,57 @@
+<script
+  type="application/json"
+  data-section-type="featured-text"
+  data-section-id="{{ section.id }}"
+>
+</script>
+
+<section class="section info-rich-text quote-rich">
+  <div class="{% if section.settings.wide_display == true %} container{% else %}rich-container container{% endif %}">
+    <div class="one-whole column">
+      <div class="rich-text__content">
+        
+
+        {% if section.settings.title != blank %}
+          <h2 class="rich-text__heading title">
+            {{ section.settings.title | escape }}
+          </h2>
+         
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Info Quote",
+  "class": "shopify-section--rich-text-and-image",
+  "settings": [
+	{
+      "type": "checkbox",
+      "id": "wide_display",
+      "label": "Wide display",
+      "default": false
+    },    
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Talk about your brand"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Info Quote",
+      "category": "Text"
+    }
+  ],
+  "templates": [
+    "index",
+    "product",
+    "page"
+  ]
+}
+
+{% endschema %}
